@@ -40,11 +40,11 @@ This repo is organised by topic or concept. Each folder contains `.sql` files wi
 
 ## 💬 Why I Built This
 
-As an online student learning SQL remotely, I created this repo to:
-- Practise what I’m learning
-- Keep track of my progress
-- Share my journey with others
-- Build a portfolio of work
+As an aspiring data analyst, I believe in learning by doing. This repo helps me:
+- Practice real SQL skills
+- Document my growth
+- Share my work with others
+- Stay consistent and motivated
 
 Recently, I even created a **Linked Server** on my own system (using my IP) so I could simulate cross-server querying — it felt like connecting two worlds together! 🌍
 
@@ -62,7 +62,7 @@ Recently, I even created a **Linked Server** on my own system (using my IP) so I
 
 If you’re also learning SQL or working with data, feel free to follow this repo, reach out, or share ideas.
 
-📫 [Connect with me on LinkedIn]([https://www.linkedin.com/in/shiva-bajelan](https://www.linkedin.com/in/shiva-bajelan-4443722a5/))
+📫 [Connect with me on LinkedIn] ([https://www.linkedin.com/in/shiva-bajelan](https://www.linkedin.com/in/shiva-bajelan-4443722a5/))
 
 > “Start where you are. Use what you have. Do what you can.” — Arthur Ashe
 
