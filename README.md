@@ -1,28 +1,24 @@
-# sql-project-with-pubs-database
-# SQL Learning with the Pubs Database 📚
+# SQL Project with Pubs Database 📚
 
 Welcome! 👋  
-This repository is where I share my hands-on SQL learning journey, using the classic **Pubs** sample database provided by Microsoft.  
-I'm currently completing a SQL course and using this space to document concepts, queries, and mini-projects as I go.
+This repository is part of my hands-on SQL learning journey. I'm currently taking a SQL course and using the classic **Pubs** sample database from Microsoft to practise concepts, write queries, and explore real-world database scenarios.
 
 ---
 
-## 📦 About the Pubs Database
+## 🧾 About the Project
 
-The **Pubs** database is a fictional dataset that represents a book publishing company. It includes data about:
+The **Pubs** database represents a fictional book publishing company and includes data about:
 - Authors
-- Titles
+- Books (titles)
 - Publishers
 - Sales
-- Bookstore locations
-...and more!
+- Store locations
 
-It's a great dataset for practicing SQL queries in a structured yet realistic setting.
+It’s a great dataset for applying SQL skills in a structured yet realistic context.
 
 ---
 
-## 📚 What You'll Find Here
+## 📁 Repository Structure
 
-This repo is organised into folders by topic. Each folder contains `.sql` files with example queries and practice exercises, along with comments explaining each one.
+This repo is organised by topic or concept. Each folder contains `.sql` files with example queries and exercises. I add comments to explain what each query does and why I used certain approaches.
 
-### Example Structure:
