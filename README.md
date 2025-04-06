@@ -22,10 +22,22 @@ It’s a great dataset for applying SQL skills in a structured yet realistic con
 
 This repo is organised by topic or concept. Each folder contains `.sql` files with example queries and exercises. I add comments to explain what each query does and why I used certain approaches.
 
+/Joins
 
+inner_joins.sql
+
+left_joins.sql /Aggregates
+
+groupby_examples.sql
+
+avg_max_min.sql /LinkedServers
+
+remote_query_examples.sql /LearningLogs
+
+Week1_Notes.md
 ---
 
-## 🧠 What I'm Learning
+## 🧠 Topics I'm Exploring
 
 - Table design and relationships
 - Data exploration and filtering
