@@ -1,83 +1,45 @@
-# SQL Project with Pubs Database 📚
+# SQL Project with Pubs Database
 
-Welcome! 👋  
-This repository is part of my hands-on SQL learning journey. I'm currently taking a SQL course and using the classic **Pubs** sample database from Microsoft to practise concepts, write queries, and explore real-world database scenarios.
+This SQL project explores the classic Microsoft **Pubs** sample database. It features a collection of queries and scripts designed to demonstrate core SQL skills through real-world scenarios.
 
----
+## 📌 Overview
 
-## 🧾 About the Project
+The project focuses on essential SQL concepts, including:
 
-The **Pubs** database represents a fictional book publishing company and includes data about:
-- Authors
-- Books (titles)
-- Publishers
-- Sales
-- Store locations
+- Data retrieval using `SELECT` statements
+- Filtering with `WHERE`, `LIKE`, `IN`, and `BETWEEN`
+- Sorting and ordering data
+- Table joins (INNER, LEFT, RIGHT)
+- Aggregation using `GROUP BY` and `HAVING`
+- Subqueries and nested queries
+- Working with **Linked Servers** in SQL Server
 
-It’s a great dataset for applying SQL skills in a structured yet realistic context.
-
----
-
-## 📁 Repository Structure
-
-This repo is organised by topic or concept. Each folder contains `.sql` files with example queries and exercises. I add comments to explain what each query does and why I used certain approaches.
-
-/Joins
-
-inner_joins.sql
-
-left_joins.sql /Aggregates
-
-groupby_examples.sql
-
-avg_max_min.sql /LinkedServers
-
-remote_query_examples.sql /LearningLogs
-
-Week1_Notes.md
----
-
-## 🧠 Topics I'm Exploring
-
-- Table design and relationships
-- Data exploration and filtering
-- Joins (inner, left, right, full)
-- Aggregation functions
-- Subqueries
-- Views
-- Linked Servers
-- Writing clear and efficient SQL queries
+The aim is to provide clear, practical examples of how SQL can be used to explore and analyze relational data in a structured and meaningful way.
 
 ---
 
-## 💬 Why I Built This
+## 📂 Repository Structure
 
-As an aspiring data analyst, I believe in learning by doing. This repo helps me:
-- Practice real SQL skills
-- Document my growth
-- Share my work with others
-- Stay consistent and motivated
+📁 /queries │ ├── 01_basic_select.sql │ ├── 02_joins_and_aggregations.sql │ ├── 03_subqueries.sql │ └── 04_linked_server_queries.sql
 
-Recently, I even created a **Linked Server** on my own system (using my IP) so I could simulate cross-server querying — it felt like connecting two worlds together! 🌍
+📁 /docs │ ├── pubs_erd.png │ └── pubs_table_structure.md
 
----
-
-## 🛠️ Tools
+## 🧰 Tech Stack
 
 - Microsoft SQL Server
 - SQL Server Management Studio (SSMS)
 - Git + GitHub
+  
+## ✅ Use Cases
 
----
+This project is suitable for:
+- Practicing intermediate SQL skills
 
-## 🤝 Let’s Learn Together!
+- Demonstrating SQL knowledge to potential employers
 
-If you’re also learning SQL or working with data, feel free to follow this repo, reach out, or share ideas.
+- Understanding cross-server querying via Linked Servers
 
-📫 [Connect with me on LinkedIn] ([https://www.linkedin.com/in/shiva-bajelan](https://www.linkedin.com/in/shiva-bajelan-4443722a5/))
+- Exploring a relational dataset with well-defined entities
 
-> “Start where you are. Use what you have. Do what you can.” — Arthur Ashe
-
----
-
-#SQL #DataAnalytics #SQLServer #LearningByDoing #PubsDatabase
+ ## 📬 Contact
+Feel free to connect with me on LinkedIn  https://www.linkedin.com/in/shiva-bajelan-4443722a5/ if you have questions, suggestions, or just want to chat about SQL or data analytics. 
