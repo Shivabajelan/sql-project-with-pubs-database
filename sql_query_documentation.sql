@@ -232,54 +232,58 @@ from titles
 where price = (select max(price) from titles)
 
 
---Using "top" for answering above question
+--Q15-1.Using "top" for answering above question
 --note: Top and Order by make the query slow so above method is more optimised
 select top 1 with ties price, title
 from titles
 order by price desc
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-select a.au_fname,a.au_lname,ta.title_id
-from authors as a
-inner join titleauthor as ta on ta.au_id = a.au_id
-
-
-
-
-
-
-
-
-
-
-
-
-
---Q16.
-select t.title, t.price
-from titles as t
-order by t.price desc
-
---	offfset syntax example
+--This query retrieves the first 5 rows from the "titles" table,
+-- ordered by "title_id". It starts from the beginning (offset 0).
 select *
 from titles
 order by title_id
 offset 0 rows
 fetch first 5 rows only
 
---Q17. using oofset
+
+-- This query retrieves the next 5 rows (rows 6 to 10) from the "titles" table,
+-- again ordered by "title_id". It skips the first 5 rows (offset 5) and fetches the next 5.
+select *
+from titles
+order by title_id
+offset 5 rows
+fetch first 5 rows only
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+--The above queries are used for pagination—a common technique to retrieve data in smaller, manageable chunks (pages), especially useful for:
+
+--Displaying data in UI (e.g. showing 5 records per page).
+
+--Improving performance by loading only a subset of records at a time.
+
+--Implementing "Load More" or "Next Page" features in applications.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--Q16.Retrive the title(s) and price(s) from the "titles" table
+--where the price matches the lowest price among the top 5 most expensive distinct titles.
+--Step 1: Inner-most query or Derived Table (This gets the top 5 most expensive books from the titles table.)
+--Step 2: Middle query: Now from that group of expensive books, we pick the lowest price. (SELECT MIN(k.price) FROM ( ... ) AS k)
+--Step 3: Main query (SELECT title, price 
+                    --FROM titles
+					--WHERE price = (result from step 2))
+select title, price
+from titles
+where price = (select min(k.price) as min_price
+				from(select distinct top 5 with ties title, price
+					from titles
+					order by price desc
+					) as k
+				)
+
+--Q16-1.Using "offset" instead of "top n"
 select title, price
 from titles
 where price = (select min(k.price) as min_price
@@ -290,25 +294,25 @@ where price = (select min(k.price) as min_price
 						fetch first 5 rows only
 					) as k
 				)
+	
 
---Q17-1. using top5
-select title, price
-from titles
-where price = (select min(k.price) as min_price
-				from (select distinct top 5 price
-						from titles
-						order by price desc
-					) as k
-				)
 
-select *
-from titles
---Q18.subquery type 2
-select title, price, (select avg(price) from titles)  as overal_avg_price, price - (select avg(price) from titles) as diff
-from titles
-group by title, price, title_id 
+--Q17.For each book, show its title, price, average price, and the difference between the average price of all books and its own price. (Compare each book's price to the overall average price)
 
---Q18.subquery type 2 is very slow. Use cross join instead of it.
-select t.title, t.price, k.av, price - k.av diff
-from titles t
-cross join (select avg(price) av from titles) k
+-- Step 1: For each title and its price (GROUP BY ensures unique rows),
+-- Step 2: Add a column showing the average price of all books (subquery),
+-- Step 3: Add a column calculating the difference between the book's price and that average.
+select title, price, (select avg(price) from titles) as avg_price, (price - (select avg(price) from titles)) as diff_with_avg
+from titles
+group by title, price;
+
+
+--Q17-1.Using "Cross join" instead of "Subquery type 2" to optimise the query
+
+--The average is computed once, not for every row. this makes the query way much faster.
+--CROSS JOIN is perfect here because Derived Table "k" returns one row, so every row from titles just gets that one row attached.
+select t.title, t.price, k.avg_price, (t.price - k.avg_price)  as diff_with_avg
+from titles as t
+cross join (select avg(price) as avg_price  from titles) as k
+
+
