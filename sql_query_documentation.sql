@@ -232,7 +232,11 @@ from titles
 where price = (select max(price) from titles)
 
 
-
+--Using "top" for answering above question
+--note: Top and Order by make the query slow so above method is more optimised
+select top 1 with ties price, title
+from titles
+order by price desc
 
 
 
