@@ -167,6 +167,7 @@ where ord_num = '6871'
 -----Correct Answer-------
 ---Q12.Join authors, titleauthor, titles, and sales tables to prepare a dataset 
 -- that links authors with their book sales. Grouped by author's full name and ID.
+select *
 from authors a
 inner join titleauthor ta on ta.au_id = a.au_id
 inner join titles t on t.title_id = ta.title_id
@@ -463,3 +464,135 @@ based on business rules involving publisher location, author count, and total sa
 - IN vs. EXISTS performance may vary depending on database engine and data distribution.
 - Joins with aggregation can be more efficient in some RDBMS when indexes are properly used.
 */
+----------------------------------------------------------------
+-- Session 9
+----------------------------------------------------------------
+-- Using "Update"
+----------------------------------------------------------------
+-- This query updates the prices of books in the 'titles' table based on dynamic business rules. 
+-- It calculates a new price for each title depending on:
+--   1. The publisher's state (a 10% increase if the publisher is based in California),
+--   2. The number of authors associated with the title (a 5% increase if more than one author),
+--   3. The total revenue generated from sales of the title (a 2% increase if revenue exceeds 500),
+--   4. A default increase of 1% if none of the above conditions are met.
+-- The new prices are computed using subqueries and applied via an INNER JOIN on the title ID.
+
+update titles 
+set price = k3.newprice
+from titles t
+inner join(select t.title_id,case when state = 'ca' then price * 1.1 
+									when k.tc>1 then price * 1.05 
+									when k2.tp > 500 then price * 1.02 else price * 1.01 
+							   end newprice
+			from titles t
+			inner join publishers p on p.pub_id = t.pub_id
+			inner join(select title_id,count(au_id) tc
+						from titleauthor
+						group by title_id)k on k.title_id = t.title_id
+			inner join(select t.title_id,sum(qty*price) tp
+						from titles t
+						inner join sales s on s.title_id = t.title_id
+						group by t.title_id)k2 on k2.title_id = t.title_id)k3 on k3.title_id = t.title_id
+
+----------------------------------------------------------------
+-- Using "Temp Table"
+----------------------------------------------------------------
+-- This query finds authors who have written more than one book, removes all their books from the "titleauthors" table, 
+-- delete them from the authors" table, and then cleans up the temporary table used in the process.
+-----------------------------------------------------------------
+
+--Q1
+-- Create a temporary table to store author IDs who have written more than one title
+create table #AuthorsWithMultipleTitles (au_id nvarchar(20))
+
+-- Insert author IDs into the temporary table where the author has more than one title
+insert into #AuthorsWithMultipleTitles
+select au_id
+from titleauthor
+group by au_id
+having count(title_id) > 1
+
+-- Delete all records from the titleauthor table for authors who have more than one title
+delete titleauthor 
+where au_id in (select au_id from #AuthorsWithMultipleTitles)
+
+-- Delete those authors from the authors table who were just removed from titleauthor
+delete authors 
+where au_id in (select au_id from #AuthorsWithMultipleTitles)
+
+-- Drop the temporary table as it's no longer needed
+drop table #AuthorsWithMultipleTitles
+
+----------------------------------------------------------------
+-- Using "Temp Table"
+----------------------------------------------------------------
+--Q2
+-- This query counts how many authors are in each city in California
+-----------------------------------------------------------------
+-- Create a temp table with authors from California
+select *
+into #CalifornianAuthors
+from authors
+where state = 'CA'
+
+-- The best practice to check if the Temp Table is created and check the resualt
+select *
+from #CalifornianAuthors
+
+-- Count how many authors per city in California
+select city, count(au_id) as TotalAuthors
+from #CalifornianAuthors
+group by city
+
+-- Drop the temp table
+drop table #CalifornianAuthors
+
+-- Using "Temp Table"
+----------------------------------------------------------------
+--Q3
+-- This query get top 3 bestselling books (based on sales)
+-----------------------------------------------------------------
+-- Create a temp table from sales and titles tables
+select s.title_id, t.title, sum(s.qty) as TotalSold
+into #TopBooks
+from sales s
+inner join titles t on t.title_id = s.title_id
+group by s.title_id, t.title
+
+-- Check if the temp table is created and review the data in it
+select *
+from #TopBooks
+
+-- select the top 3 bestselling books
+select top 3 *
+from #TopBooks
+order by TotalSold desc
+
+-- Drop the temp table
+drop table #TopBooks
+
+-- Using "Temp Table"
+----------------------------------------------------------------
+--Q4
+-- This query lets me analyse which books sold how many copies in each store, and how much each book cost.
+-- I used temp table to simplify a complex join
+-- Instead of writing a long query many times, I save part of it in a temp table first.
+-----------------------------------------------------------------
+-- Create a temp table with book prices
+select title_id, price
+into #BookPrice
+from titles
+where price is not null
+
+-- Check if the temp table is created and review the data in it
+select *
+from #BookPrice
+
+-- Join #BookPrice to the sales table to find which books sold how many copies in each store, and how much each book cost
+select s.stor_id, b.title_id, b.price, sum(s.qty) as TotalSold
+from #BookPrice b
+inner join sales s on s.title_id = b.title_id
+group by s.stor_id, b.title_id, b.price
+
+-- Drop the temp table
+drop table #BookPrice
