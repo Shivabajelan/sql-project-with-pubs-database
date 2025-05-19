@@ -16,6 +16,9 @@ The project focuses on essential SQL concepts, including:
 
 The aim is to provide clear, practical examples of how SQL can be used to explore and analyze relational data in a structured and meaningful way.
 
+## 📘 Pubs Database Relational Diagram
+
+The diagram below shows the relationships between key tables in the classic Pubs database, including `authors`, `titles`, `publishers`, and their junction tables.
 ![Relational Diagram](Outputs/pubs_relational_diagram.jpg)
 ---
 
