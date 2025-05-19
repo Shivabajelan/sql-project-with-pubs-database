@@ -16,7 +16,7 @@ The project focuses on essential SQL concepts, including:
 
 The aim is to provide clear, practical examples of how SQL can be used to explore and analyze relational data in a structured and meaningful way.
 
-![image] 
+![image] https://github.com/Shivabajelan/sql-project-with-pubs-database/blob/main/Outputs/pubs_relational_diagram.jpg
 ---
 
 ## 📂 Repository Structure
