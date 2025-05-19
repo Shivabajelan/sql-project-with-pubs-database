@@ -18,7 +18,7 @@ The aim is to provide clear, practical examples of how SQL can be used to explor
 
 ## 📘 Pubs Database Relational Diagram
 
-The diagram below shows the relationships between key tables in the classic Pubs database, including `authors`, `titles`, `publishers`, and their junction tables.
+### The diagram below shows the relationships between key tables in the classic Pubs database, including `authors`, `titles`, `publishers`, and their junction tables.
 ![Relational Diagram](Outputs/pubs_relational_diagram.jpg)
 ---
 
