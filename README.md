@@ -12,7 +12,6 @@ The project focuses on essential SQL concepts, including:
 - Table joins (INNER, LEFT, RIGHT)
 - Aggregation using `GROUP BY` and `HAVING`
 - Subqueries and nested queries
-- Working with **Linked Servers** in SQL Server
 
 The aim is to provide clear, practical examples of how SQL can be used to explore and analyze relational data in a structured and meaningful way.
 
@@ -22,11 +21,6 @@ The aim is to provide clear, practical examples of how SQL can be used to explor
 ![Relational Diagram](Outputs/pubs_relational_diagram.jpg)
 ---
 
-## 📂 Repository Structure
-
-📁 /queries │ ├── 01_basic_select.sql │ ├── 02_joins_and_aggregations.sql │ ├── 03_subqueries.sql │ └── 04_linked_server_queries.sql
-
-📁 /docs │ ├── pubs_erd.png │ └── pubs_table_structure.md
 
 ## 🧰 Tech Stack
 
